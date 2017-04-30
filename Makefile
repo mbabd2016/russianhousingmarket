@@ -7,7 +7,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
 PROJECT_NAME = russianhousingmarket
-PYTHON_INTERPRETER = python3
+PYTHON_INTERPRETER = ~/anaconda3/bin/python3
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
