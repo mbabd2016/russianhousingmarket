@@ -5,9 +5,9 @@
 #################################################################################
 
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
-BUCKET = [OPTIONAL] your-bucket-for-syncing-data (do not include 's3://')
+BUCKET =
 PROJECT_NAME = russianhousingmarket
-PYTHON_INTERPRETER = ~/anaconda3/bin/python3
+PYTHON_INTERPRETER = python3
 
 ifeq (,$(shell which conda))
 HAS_CONDA=False
@@ -19,9 +19,23 @@ endif
 # COMMANDS                                                                      #
 #################################################################################
 
+## Check conda, python, project dir, bucket
+check_vars:
+	@echo;\
+	echo 'Project directory:' $(PROJECT_DIR);\
+	echo 'Python interpreter:' $(PYTHON_INTERPRETER);\
+	echo 'Python executable:';\
+	echo | which $(PYTHON_INTERPRETER);\
+	echo 'Has conda?:' $(HAS_CONDA);\
+	echo 'AWS S3 bucket:' $(BUCKET)
+
 ## Install Python Dependencies
 requirements: test_environment
+ifeq (True,$(HAS_CONDA))
+	conda env update -f environment.yml
+else
 	pip install -r requirements.txt
+endif
 
 ## Make Dataset
 data: requirements
@@ -32,8 +46,8 @@ clean:
 	find . -name "*.pyc" -exec rm {} \;
 
 ## Lint using flake8
-lint:
-	flake8 --exclude=lib/,bin/,docs/conf.py .
+## lint:
+##	flake8 --exclude=lib/,bin/,docs/conf.py .
 
 ## Upload Data to S3
 sync_data_to_s3:
@@ -46,13 +60,13 @@ sync_data_from_s3:
 ## Set up python interpreter environment
 create_environment:
 ifeq (True,$(HAS_CONDA))
-		@echo ">>> Detected conda, creating conda environment."
+	@echo ">>> Detected conda, creating conda environment."
 ifeq (3,$(findstring 3,$(PYTHON_INTERPRETER)))
-	conda create --name $(PROJECT_NAME) python=3.5
+	conda create --name $(PROJECT_NAME) python=3.6
 else
 	conda create --name $(PROJECT_NAME) python=2.7
 endif
-		@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
+	@echo ">>> New conda env created. Activate with:\nsource activate $(PROJECT_NAME)"
 else
 	@pip install -q virtualenv virtualenvwrapper
 	@echo ">>> Installing virtualenvwrapper if not already intalled.\nMake sure the following lines are in shell startup file\n\

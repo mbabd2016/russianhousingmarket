@@ -2,5 +2,5 @@ click
 Sphinx
 coverage
 awscli
-flake8
+pandas
 python-dotenv>=0.5.1

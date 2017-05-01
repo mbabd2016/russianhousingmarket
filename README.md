@@ -1,7 +1,20 @@
 RussianHousingMarket
 ==============================
 
-Kaggla SberBank Russian housing market competition
+Kaggle Russian housing market competition
+
+Steps:
+
+1. Ensure you have python installed, or just install [anaconda](https://www.continuum.io/downloads).
+2. Clone this repository.
+3. cd into this repository.
+4. `make create_environment` to create the necessary python environment with conda (preferred) or pip.
+5. `source activate <env_name>` (conda) or `workon <env_name>` to change into environment (make sure the prompt changes to `<env_name> ... $` etc.). Assume everything will be carried on inside this environment from now on.
+6. `make check_vars` and ensure everything's in order.
+7. `make requirements` to install packages required for project.
+8. `python -m ipykernel install --user --name <env_name> --display-name "Python (<env_name>)"` to install jupyter kernel for project environment. 
+9. `make test_environment` and `make check_vars` again to ensure everything's cool.
+
 
 Project Organization
 ------------
