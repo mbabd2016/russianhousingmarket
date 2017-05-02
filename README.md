@@ -13,17 +13,28 @@ Analysis Guidelines
 Steps for Automatic Environment and Project Initialization
 -------------
 
+### Linux and macOS
+
 1. Ensure you have python installed, or just install [anaconda](https://www.continuum.io/downloads).
 2. Clone this repository.
 3. cd into this repository.
-3. `make check_vars` and ensure everything's in order (python detected, conda detected, etc.)
-4. `make create_environment` to create the necessary python environment with conda (preferred) or pip.
-5. `source activate <env_name>` (conda) or `workon <env_name>` (pip) to change into environment (make sure the prompt changes to `(<env_name>) ... $` etc.). Assume everything will be carried on inside this environment from now on.
-6. `make check_vars` and ensure everything's in order again.
-7. `make requirements` to install packages required for project.
-8. `python -m ipykernel install --user --name <env_name> --display-name "Python (<env_name>)"` to install jupyter kernel for project environment.
-9. `make test_environment` and `make check_vars` again to ensure everything's cool.
+4. `make check_vars` and ensure everything's in order (python detected, conda detected, etc.)
+6. `make create_environment` to create the necessary python environment with conda (preferred) or pip.
+6. `source activate <env_name>` (conda) or `workon <env_name>` (pip) to change into environment (make sure the prompt changes to `(<env_name>) ... $` etc.). Assume everything will be carried on inside this environment from now on.
+7. `make check_vars` and ensure everything's in order again.
+8. `make requirements` to install packages required for project.
+9. `python -m ipykernel install --user --name <env_name> --display-name "Python (<env_name>)"` to install jupyter kernel for project environment.
+10. `make test_environment` and `make check_vars` again to ensure everything's cool.
 
+### Windows
+
+1. Ensure you have python installed, or just install [anaconda](https://www.continuum.io/downloads).
+2. Clone this repository.
+3. cd into this repository.
+4. Create a python environment with conda (preferred) or pip (`conda create --name <env_name> python=3.6`)
+5. `source activate <env_name>` (conda) or `workon <env_name>` (pip) to change into environment (make sure the prompt changes to `(<env_name>) ... $` etc.). Assume everything will be carried on inside this environment from now on.
+6. `conda env update -f environment.yml` or `pip install -r requirements.txt` to install packages and dependencies
+8. `python -m ipykernel install --user --name <env_name> --display-name "Python (<env_name>)"` to install jupyter kernel for project environment.
 
 Project Organization
 ------------
