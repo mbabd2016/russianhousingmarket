@@ -45,10 +45,6 @@ data: requirements
 clean:
 	find . -name "*.pyc" -exec rm {} \;
 
-## Lint using flake8
-## lint:
-##	flake8 --exclude=lib/,bin/,docs/conf.py .
-
 ## Upload Data to S3
 sync_data_to_s3:
 	aws s3 sync data/ s3://$(BUCKET)/data/
