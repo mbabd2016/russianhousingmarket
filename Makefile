@@ -34,7 +34,7 @@ requirements: test_environment
 ifeq (True,$(HAS_CONDA))
 	conda env update -f environment.yml
 else
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 endif
 
 ## Make Dataset
